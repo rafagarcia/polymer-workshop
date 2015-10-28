@@ -1,0 +1,98 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="elements/mobiles-list/mobiles-list.html">
+<link rel="import" href="elements/mobile-data/mobile-data.html">
+<link rel="import" href="theme/theme.html">
+
+<!--
+An element providing a solution to no problem in particular.
+
+Example:
+
+    <mobile-view></mobile-view>
+
+@demo
+-->
+<dom-module id="mobile-view">
+
+  <style>
+    :host {
+      font-family: var(--fontDefault);
+    }
+
+    .container {
+      @apply(--layout-vertical);
+    }
+
+    @media (min-width: 600px) {
+      .container {
+        @apply(--layout-horizontal);
+      }
+      mobiles-list, mobile-data {
+        @apply(--layout-flex);
+      }
+    }
+    
+  </style>
+
+  <template>
+    <p>Consulte las características de los siguientes móviles:</p>
+    <div class="container">
+      <mobiles-list></mobiles-list>
+      <template is="dom-if" if="{{mobileSelected}}">
+        <mobile-data mobile-detail="{{mobileSelected}}"></mobile-data>
+      </template>
+    </div>
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'mobile-view',
+
+    listeners: {
+      "mobileSelected" : "setMobile",
+      "closeDetails": "_closeDetailView"
+    },
+
+    properties: {
+      data: {
+        type: Object
+      },
+
+      mobileSelected: {
+        type: Object
+      }
+    },
+
+    // Element Lifecycle
+
+    ready: function() {
+    },
+
+    attached: function() {
+    },
+
+    setMobile: function(item) {
+      this.set('mobileSelected', item.detail);
+    },
+
+    _closeDetailView: function () {
+      console.log('Cierra Detalle');
+      this.set('mobileSelected', '');
+    }
+
+  });
+
+</script>

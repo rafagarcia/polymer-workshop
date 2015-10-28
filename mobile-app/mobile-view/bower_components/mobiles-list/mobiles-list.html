@@ -1,0 +1,98 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<!--
+An element providing a solution to no problem in particular.
+
+Example:
+
+    <mobiles-list></mobiles-list>
+
+@demo
+-->
+<dom-module id="mobiles-list">
+
+  <style>
+    :host {
+      display: block;
+      margin-right: 20px;
+    }
+
+    p {
+      @apply(--strong-text);
+    }
+
+    @media (max-width: 600px) {
+      .button-detail{
+        text-align: right;
+      }
+    }
+  </style>
+
+  <template>
+    <iron-ajax
+        auto
+        url="mobiles.json"
+        handle-as="json"
+        on-response="handleResponse"
+        last-response="{{data}}"
+        debounce-duration="300">
+    </iron-ajax>
+    <h2>Listado de móviles</h2>
+    <template is="dom-repeat" id="list" items="{{data.mobiles}}">
+        <p class="list-mobile layout horizontal">
+          <span class="flex-2">{{item.name}}</span>
+          <span class="flex-1 button-detail"><button on-click="showDetail">Detalle</button></span>
+        </p>
+    </template>
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'mobiles-list',
+
+    properties: {
+      data : {
+        type: Object
+      },
+
+      mobileSelected: {
+        type: Object,
+        notify: true
+      } 
+    },
+
+
+    ready: function() {
+    },
+
+    attached: function() {
+    },
+
+    handleResponse: function(event) {
+    },
+
+    show: function(data) {
+      console.log(data);
+    },
+
+    showDetail: function(event) {
+      this.fire('mobileSelected', event.model.item);
+    }
+
+  });
+
+</script>
