@@ -1,0 +1,56 @@
+
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+
+<!--
+An element providing a solution to no problem in particular.
+
+Example:
+
+    <child-1></child-1>
+
+@demo
+-->
+<dom-module id="child-1">
+
+  <style>
+    :host {
+      display: block;
+      box-sizing: border-box;
+    }
+
+    #block {
+      height: 200px;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: lightblue;
+    }
+  </style>
+
+  <template>
+    <div id="block">
+      <h1>&lt;child-1&gt;</h1>
+      <h2>Hola, <span>{{name}}</span></h2>
+      <!--<input type="text" value="{{name::input}}">-->
+      <paper-input label="Introduce tu nombre" value="{{name}}"></paper-input>
+    </div>
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'child-1',
+
+    properties: {
+      name: {
+        type: String,
+        value: 'Desconocido',
+        notify: true
+      }
+    }
+
+  });
+
+</script>

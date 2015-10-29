@@ -1,0 +1,58 @@
+<!--
+An element providing a solution to no problem in particular.
+
+Example:
+
+    <child-2></child-2>
+
+@demo
+-->
+<dom-module id="child-2">
+
+  <style>
+    :host {
+      display: block;
+      box-sizing: border-box;
+    }
+
+    #block {
+      height: 100px;
+      padding: 10px;
+      background-color: lightgrey;
+    }
+  </style>
+
+  <template>
+    <div id="block">
+      <h1>&lt;child-2&gt;</h1>
+      <p style="color:red">{{name}}</p>
+    </div>
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'child-2',
+
+    properties: {
+      name: {
+        type: String,
+        //Inspects any change on this property value triggering the method assigned as value in this property
+        observer: '_checkname'
+      }
+    },
+
+    _checkname: function () {
+      if (this.name === 'Joshua') {
+        alert('Logon');
+        //Fires the 'loggedin' event upwards
+        this.fire('loggedin');
+      }
+    }
+
+  });
+
+</script>
